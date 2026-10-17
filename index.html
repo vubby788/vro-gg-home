@@ -3,449 +3,373 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#08080d">
-<title>vro.gg — Your Space</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#09090f">
+<title>vro.gg | Browser</title>
 <style>
 :root {
-  --bg: #08080d;
-  --panel: #111119;
-  --text: #f5f5ff;
-  --muted: #9999ad;
+  color-scheme: dark;
+  --bg: #09090f;
+  --panel: #13131d;
+  --muted: #a1a1b5;
+  --line: #ffffff18;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Inter, system-ui, Arial, sans-serif;
   min-height: 100vh;
-}
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
   background:
-    radial-gradient(ellipse at 10% 5%, #742cff20, transparent 40%),
-    radial-gradient(ellipse at 90% 25%, #00d9ff14, transparent 38%),
-    radial-gradient(ellipse at 50% 100%, #ff238414, transparent 45%);
+    radial-gradient(ellipse at 10% 0%,#8b35ff1c,transparent 38%),
+    radial-gradient(ellipse at 95% 20%,#00d9ff12,transparent 35%),
+    var(--bg);
+  color: #f7f7ff;
+  font: 15px system-ui, sans-serif;
 }
+button, input { font: inherit; }
+button { cursor: pointer; }
 header {
-  position: sticky;
-  top: 0;
-  z-index: 5;
+  height: 65px;
+  padding: 0 5%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 17px 6%;
-  background: #09090de8;
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid #ffffff12;
+  border-bottom: 1px solid var(--line);
+  background: #09090fe8;
 }
 .logo {
-  font-size: 26px;
-  font-weight: 950;
-  letter-spacing: -1.5px;
   color: white;
   text-decoration: none;
+  font-size: 25px;
+  font-weight: 950;
+  letter-spacing: -1px;
 }
 .logo span {
-  background: linear-gradient(90deg,#ff4bd8,#9c62ff,#36dcff,#4dffb8);
-  background-clip: text;
-  -webkit-background-clip: text;
+  background: linear-gradient(90deg,#ff4bd8,#9561ff,#29dfff,#4dffad);
   color: transparent;
+  background-clip: text;
 }
-nav { display: flex; gap: 20px; }
-nav a {
-  color: #b8b8ca;
-  text-decoration: none;
-  font-size: 14px;
-}
-nav a:hover { color: white; }
-main { width: min(1050px, 90%); margin: auto; }
-.hero {
-  padding: 85px 0 45px;
-  text-align: center;
-}
-.pill {
-  display: inline-block;
-  padding: 8px 13px;
-  border: 1px solid #b45bff65;
-  background: #a12aff12;
-  color: #d9a4ff;
-  border-radius: 30px;
-  font-size: 12px;
-  letter-spacing: 1px;
-}
-h1 {
-  font-size: clamp(43px, 10vw, 78px);
-  line-height: 1.05;
-  letter-spacing: -4px;
-  margin: 22px 0 14px;
-}
+.status { color: #a9a9bc; font-size: 12px; }
+main { width: min(1100px,94%); margin: auto; }
+.hero { text-align: center; padding: 32px 0 22px; }
+h1 { font-size: clamp(30px,7vw,48px); margin: 0 0 8px; }
 .gradient {
-  background: linear-gradient(90deg,#ff4bd8,#9c62ff,#36dcff,#4dffb8);
-  background-size: 250% 250%;
-  animation: rainbow 7s linear infinite;
-  background-clip: text;
-  -webkit-background-clip: text;
+  background: linear-gradient(90deg,#ff4bd8,#9561ff,#29dfff,#4dffad);
+  background-size: 250% 100%;
+  animation: rgb 8s linear infinite;
   color: transparent;
+  background-clip: text;
 }
-@keyframes rainbow {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 250% 50%; }
+@keyframes rgb {
+  to { background-position: 250% 50%; }
 }
-.subtitle {
-  max-width: 510px;
-  margin: auto;
-  color: var(--muted);
-  line-height: 1.7;
-  font-size: 15px;
-}
-.search {
+.hero p { color: var(--muted); margin: 0; }
+.quick {
   display: flex;
-  max-width: 590px;
-  margin: 30px auto 0;
-  padding: 6px;
-  border: 1px solid #ffffff20;
-  border-radius: 14px;
-  background: #111119dd;
-  box-shadow: 0 0 35px #8d32ff0c;
+  flex-wrap: wrap;
+  gap: 9px;
+  justify-content: center;
+  margin: 22px 0;
 }
-.search input {
-  flex: 1;
-  min-width: 0;
-  padding: 13px;
-  background: transparent;
-  border: 0;
-  outline: 0;
+.quick button {
+  color: #eeeefa;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 11px 15px;
+}
+.quick button:hover { border-color: #b35bff; }
+.browser {
+  overflow: hidden;
+  background: #11111a;
+  border: 1px solid #9a4dff70;
+  border-radius: 16px;
+  box-shadow: 0 0 35px #8e38ff13;
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 11px;
+  background: #171722;
+  border-bottom: 1px solid var(--line);
+}
+.tool {
+  min-width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  background: #22222f;
   color: white;
-  font-size: 15px;
 }
-.search button, .primary {
+.address {
+  flex: 1;
+  min-width: 120px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #ffffff20;
+  border-radius: 10px;
+  outline: none;
+  color: white;
+  background: #09090f;
+}
+.address:focus { border-color: #a64dff; }
+.go {
+  height: 40px;
+  padding: 0 16px;
+  color: white;
+  font-weight: 750;
   border: 0;
   border-radius: 10px;
-  padding: 12px 18px;
-  color: white;
-  background: linear-gradient(110deg,#8b39ff,#d23dcb,#278eff);
-  font-weight: 750;
-  cursor: pointer;
-  text-decoration: none;
+  background: linear-gradient(110deg,#8c3bff,#d13ed3,#238eff);
 }
-section { padding: 35px 0; }
-.section-head {
+.notice {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 18px;
-}
-h2 { margin: 0; font-size: 22px; }
-.section-head p { color: var(--muted); font-size: 13px; }
-.filters {
-  display: flex;
-  gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  gap: 10px;
+  padding: 12px 15px;
+  color: #b6b6ca;
+  font-size: 12px;
+  border-bottom: 1px solid var(--line);
 }
-.filter {
-  padding: 9px 14px;
-  color: #b8b8ca;
-  background: #14141e;
-  border: 1px solid #ffffff12;
-  border-radius: 30px;
-  cursor: pointer;
+.external {
+  color: #e3c8ff;
+  text-decoration: none;
+  font-weight: 700;
 }
-.filter.active, .filter:hover {
-  color: white;
-  border-color: #b64cff;
-  background: #a52cff20;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3,minmax(0,1fr));
-  gap: 15px;
-}
-.tile {
+.frame-wrap {
   position: relative;
-  overflow: hidden;
-  padding: 20px;
-  min-height: 150px;
-  background: var(--panel);
-  border: 1px solid #ffffff14;
-  border-radius: 16px;
-  transition: transform .2s, border-color .2s;
+  height: min(68vh,650px);
+  min-height: 330px;
+  background:
+    radial-gradient(ellipse,#202032,transparent 70%),
+    #0c0c13;
 }
-.tile::before {
-  content: "";
+iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: white;
+}
+.welcome {
   position: absolute;
-  height: 2px;
-  left: 15%;
-  right: 15%;
-  top: 0;
-  background: linear-gradient(90deg,#ff4bd8,#8054ff,#35dcff,#48ffae);
-  opacity: .75;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 25px;
+  text-align: center;
+  background: #0c0c13;
 }
-.tile:hover {
-  transform: translateY(-4px);
-  border-color: #b74cff85;
-}
-.tile .symbol {
+.welcome .orb {
   display: grid;
   place-items: center;
-  width: 43px;
-  height: 43px;
-  margin-bottom: 16px;
-  border-radius: 12px;
-  background: linear-gradient(135deg,#a42cff32,#00d9ff24);
-  font-size: 21px;
+  width: 75px;
+  height: 75px;
+  font-size: 30px;
+  border-radius: 23px;
+  border: 1px solid #ad58ff;
+  box-shadow: 0 0 35px #973cff35;
 }
-.tile h3 { margin: 0 0 7px; font-size: 16px; }
-.tile p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
-.tile a {
-  display: block;
-  color: inherit;
-  text-decoration: none;
+.welcome h2 { margin: 0; }
+.welcome p { max-width: 410px; line-height: 1.7; color: var(--muted); }
+.primary {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: white;
+  background: linear-gradient(110deg,#8c3bff,#d13ed3);
 }
-.empty { display: none; color: var(--muted); padding: 25px 0; }
-.about {
-  border: 1px solid #ffffff14;
-  background: #111119b8;
-  border-radius: 18px;
-  padding: 28px;
-  line-height: 1.7;
-  color: var(--muted);
-}
-.about h2 { color: white; margin-bottom: 10px; }
 footer {
-  border-top: 1px solid #ffffff12;
-  text-align: center;
-  padding: 27px 12px;
-  margin-top: 30px;
+  padding: 22px 10px 30px;
   color: #77778c;
   font-size: 12px;
+  text-align: center;
 }
-@media(max-width:650px) {
-  header { padding: 15px 5%; }
-  nav { gap: 12px; }
-  nav a { font-size: 12px; }
-  .hero { padding-top: 65px; }
-  h1 { letter-spacing: -2px; }
-  .grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
-  .tile { padding: 15px; min-height: 145px; }
-  .search button { padding: 11px; }
-}
-@media(max-width:380px) {
-  .grid { grid-template-columns: 1fr; }
+@media(max-width:500px) {
+  header { height: 58px; }
+  .hero { padding-top: 26px; }
+  .quick { gap: 7px; }
+  .quick button { padding: 10px 12px; }
+  .toolbar { gap: 6px; }
+  .tool { min-width: 34px; }
+  .go { padding: 0 12px; }
+  .frame-wrap { min-height: 360px; height: 65vh; }
 }
 @media(prefers-reduced-motion:reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-  }
+  *,*::before,*::after { animation: none !important; }
 }
 </style>
 </head>
 <body>
 <header>
-  <a class="logo" href="#">vro<span>.gg</span></a>
-  <nav>
-    <a href="#links">Quick links</a>
-    <a href="#about">About</a>
-  </nav>
+  <a class="logo" href="./">vro<span>.gg</span></a>
+  <span class="status">RGB BROWSER</span>
 </header>
 
 <main>
   <section class="hero">
-    <span class="pill">YOUR SPACE. YOUR STYLE.</span>
-    <h1>Welcome to<br><span class="gradient">vro.gg</span></h1>
-    <p class="subtitle">
-      Your own corner of the internet.
-      Clean design, neon colors, and your favorite links in one place.
-    </p>
-    <form class="search" id="searchForm">
-      <input id="searchInput" type="search"
-        placeholder="Search your quick links..." aria-label="Search links">
-      <button type="submit">Search</button>
+    <h1>Your web, <span class="gradient">your way.</span></h1>
+    <p>Browse supported websites inside vro.gg.</p>
+  </section>
+
+  <div class="quick" aria-label="Quick websites">
+    <button data-url="https://www.youtube.com/">▶ YouTube</button>
+    <button data-url="https://www.tiktok.com/">♪ TikTok</button>
+    <button data-url="https://discord.com/app">☁ Discord</button>
+    <button data-url="https://open.spotify.com/">♫ Spotify</button>
+    <button data-url="https://www.google.com/">⌕ Google</button>
+    <button data-url="https://www.wikipedia.org/">W Wikipedia</button>
+  </div>
+
+  <section class="browser">
+    <form class="toolbar" id="navForm">
+      <button class="tool" id="back" type="button" title="Back">←</button>
+      <button class="tool" id="forward" type="button" title="Forward">→</button>
+      <button class="tool" id="refresh" type="button" title="Reload">↻</button>
+      <input class="address" id="address" type="text"
+        placeholder="Enter a website address..." autocomplete="url"
+        aria-label="Website address">
+      <button class="go" type="submit">Go</button>
     </form>
-  </section>
 
-  <section id="links">
-    <div class="section-head">
-      <h2>Quick links</h2>
-      <p id="count">6 links</p>
-    </div>
-    <div class="filters">
-      <button class="filter active" data-category="all">All</button>
-      <button class="filter" data-category="games">Games</button>
-      <button class="filter" data-category="tools">Tools</button>
-      <button class="filter" data-category="sites">Websites</button>
+    <div class="notice">
+      <span id="message">Ready to browse</span>
+      <a class="external" id="external" href="https://www.google.com/"
+         target="_blank" rel="noopener noreferrer">Open externally ↗</a>
     </div>
 
-    <div class="grid" id="linkGrid">
-      <!-- Replace each href="#" with your own link. -->
-      
-<article class="tile" data-category="sites">
-  <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">
-    <div class="symbol">♪</div>
-    <h3>TikTok</h3>
-    <p>Discover videos and creators.</p>
-    <span class="site-button">Open Website ↗</span>
-  </a>
-</article>
+    <div class="frame-wrap">
+      <iframe id="view" title="Embedded website"
+        sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="fullscreen; autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen></iframe>
 
-<article class="tile" data-category="sites">
-  <a href="https://discord.com/app" target="_blank" rel="noopener noreferrer">
-    <div class="symbol">◈</div>
-    <h3>Discord</h3>
-    <p>Chat, communities and friends.</p>
-    <span class="site-button">Open Website ↗</span>
-  </a>
-</article>
-
-<article class="tile" data-category="sites">
-  <a href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">
-    <div class="symbol">♫</div>
-    <h3>Spotify</h3>
-    <p>Listen to music and podcasts.</p>
-    <span class="site-button">Open Website ↗</span>
-  </a>
-</article>
-
-<article class="tile" data-category="sites">
-  <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
-    <div class="symbol">▶</div>
-    <h3>YouTube</h3>
-    <p>Watch videos and explore channels.</p>
-    <span class="site-button">Open Website ↗</span>
-  </a>
-</article>
-
-<article class="tile" data-category="sites">
-  <a href="https://www.twitch.tv/" target="_blank" rel="noopener noreferrer">
-    <div class="symbol">▣</div>
-    <h3>Twitch</h3>
-    <p>Watch live streams.</p>
-    <span class="site-button">Open Website ↗</span>
-  </a>
-</article>
-
-<article class="tile" data-category="sites">
-  <a href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer">
-    <div class="symbol">◎</div>
-    <h3>Reddit</h3>
-    <p>Explore communities and discussions.</p>
-    <span class="site-button">Open Website ↗</span>
-  </a>
-</article>
-
-<article class="tile" data-category="games">
-        <a href="#" target="_blank" rel="noopener">
-          <div class="symbol">🎮</div>
-          <h3>Game One</h3>
-          <p>Add your favorite game link here.</p>
-        </a>
-      </article>
-      <article class="tile" data-category="games">
-        <a href="#" target="_blank" rel="noopener">
-          <div class="symbol">🕹️</div>
-          <h3>Game Two</h3>
-          <p>Your next gaming destination.</p>
-        </a>
-      </article>
-      <article class="tile" data-category="games">
-        <a href="#" target="_blank" rel="noopener">
-          <div class="symbol">👾</div>
-          <h3>Game Three</h3>
-          <p>Customize this card any way you want.</p>
-        </a>
-      </article>
-      <article class="tile" data-category="tools">
-        <a href="#" target="_blank" rel="noopener">
-          <div class="symbol">🛠️</div>
-          <h3>My Tools</h3>
-          <p>Link to a useful tool or project.</p>
-        </a>
-      </article>
-      <article class="tile" data-category="sites">
-        <a href="#" target="_blank" rel="noopener">
-          <div class="symbol">🌐</div>
-          <h3>My Website</h3>
-          <p>Put your own website here.</p>
-        </a>
-      </article>
-      <article class="tile" data-category="sites">
-        <a href="#" target="_blank" rel="noopener">
-          <div class="symbol">✨</div>
-          <h3>More Links</h3>
-          <p>Add another destination when you're ready.</p>
-        </a>
-      </article>
-    </div>
-    <p class="empty" id="empty">No matching links found.</p>
-  </section>
-
-  <section id="about">
-    <div class="about">
-      <h2><span class="gradient">Made your way.</span></h2>
-      This is your vro.gg homepage. Edit the card names,
-      descriptions, icons, and link addresses directly in
-      <code>index.html</code>. This page is a homepage, not a
-      built-in game host or proxy.
+      <div class="welcome" id="welcome">
+        <div class="orb">✦</div>
+        <h2>Welcome to <span class="gradient">vro.gg</span></h2>
+        <p>Enter a website above or pick a quick link. If a website blocks embedding, use the external link.</p>
+        <button class="primary" id="start" type="button">Open Google</button>
+      </div>
     </div>
   </section>
 </main>
 
-<footer>vro.gg · Your space on the web</footer>
+<footer>
+  vro.gg · Independent browser interface · External sites have their own rules
+</footer>
 
 <script>
-const input = document.getElementById("searchInput");
-const cards = [...document.querySelectorAll(".tile")];
-const filters = [...document.querySelectorAll(".filter")];
-const count = document.getElementById("count");
-const empty = document.getElementById("empty");
-let category = "all";
+const frame = document.getElementById("view");
+const address = document.getElementById("address");
+const message = document.getElementById("message");
+const external = document.getElementById("external");
+const welcome = document.getElementById("welcome");
 
-function updateCards() {
-  const query = input.value.trim().toLowerCase();
-  let shown = 0;
+let currentURL = "";
+let historyList = [];
+let historyIndex = -1;
 
-  cards.forEach(card => {
-    const matchesText = card.innerText.toLowerCase().includes(query);
-    const matchesCategory =
-      category === "all" || card.dataset.category === category;
-    const visible = matchesText && matchesCategory;
-    card.style.display = visible ? "" : "none";
-    if (visible) shown++;
-  });
+function normalizeURL(raw) {
+  let value = raw.trim();
+  if (!value) throw Error("Enter a website address first.");
 
-  count.textContent = shown + (shown === 1 ? " link" : " links");
-  empty.style.display = shown ? "none" : "block";
+  if (!/^https?:\/\//i.test(value)) {
+    if (/^(localhost|[\w-]+(\.[\w-]+)+)(:\d+)?(\/.*)?$/i.test(value)) {
+      value = "https://" + value;
+    } else {
+      value = "https://www.google.com/search?q=" +
+        encodeURIComponent(value);
+    }
+  }
+
+  const url = new URL(value);
+  if (url.protocol !== "https:" && url.protocol !== "http:") {
+    throw Error("Only HTTP and HTTPS websites are supported.");
+  }
+  if (!url.hostname.includes(".") &&
+      url.hostname !== "localhost") {
+    throw Error("Please enter a valid website address.");
+  }
+  return url.href;
 }
 
-filters.forEach(button => {
-  button.addEventListener("click", () => {
-    category = button.dataset.category;
-    filters.forEach(item =>
-      item.classList.toggle("active", item === button)
-    );
-    updateCards();
-  });
-});
+function openSite(raw, addHistory = true) {
+  let url;
+  try {
+    url = normalizeURL(raw);
+  } catch (error) {
+    message.textContent = error.message;
+    return;
+  }
 
-document.getElementById("searchForm").addEventListener("submit", event => {
+  currentURL = url;
+  address.value = url;
+  external.href = url;
+  message.textContent = "Trying embedded view…";
+  welcome.style.display = "none";
+
+  if (addHistory) {
+    historyList = historyList.slice(0, historyIndex + 1);
+    historyList.push(url);
+    historyIndex = historyList.length - 1;
+  }
+
+  frame.src = url;
+}
+
+document.getElementById("navForm").addEventListener("submit", event => {
   event.preventDefault();
-  updateCards();
-  document.getElementById("links").scrollIntoView({behavior:"smooth"});
+  openSite(address.value);
 });
 
-input.addEventListener("input", updateCards);
-updateCards();
+document.querySelectorAll("[data-url]").forEach(button => {
+  button.addEventListener("click", () => openSite(button.dataset.url));
+});
+
+document.getElementById("start").addEventListener("click", () => {
+  openSite("https://www.google.com/");
+});
+
+document.getElementById("back").addEventListener("click", () => {
+  if (historyIndex > 0) {
+    historyIndex--;
+    openSite(historyList[historyIndex], false);
+  } else {
+    message.textContent = "No earlier page in vro.gg history.";
+  }
+});
+
+document.getElementById("forward").addEventListener("click", () => {
+  if (historyIndex < historyList.length - 1) {
+    historyIndex++;
+    openSite(historyList[historyIndex], false);
+  } else {
+    message.textContent = "No forward page in vro.gg history.";
+  }
+});
+
+document.getElementById("refresh").addEventListener("click", () => {
+  if (currentURL) {
+    frame.src = currentURL;
+    message.textContent = "Reloading page…";
+  }
+});
+
+frame.addEventListener("load", () => {
+  message.textContent =
+    "Page response received. If blank, blocked, or incomplete, open externally.";
+});
+
+frame.addEventListener("error", () => {
+  message.textContent =
+    "This site could not load here. Try opening it externally.";
+});
 </script>
 </body>
 </html>
