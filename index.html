@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08080d">
+<title>vro.gg — Your Space</title>
+<style>
+:root {
+  --bg: #08080d;
+  --panel: #111119;
+  --text: #f5f5ff;
+  --muted: #9999ad;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, Arial, sans-serif;
+  min-height: 100vh;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 10% 5%, #742cff20, transparent 40%),
+    radial-gradient(ellipse at 90% 25%, #00d9ff14, transparent 38%),
+    radial-gradient(ellipse at 50% 100%, #ff238414, transparent 45%);
+}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 17px 6%;
+  background: #09090de8;
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid #ffffff12;
+}
+.logo {
+  font-size: 26px;
+  font-weight: 950;
+  letter-spacing: -1.5px;
+  color: white;
+  text-decoration: none;
+}
+.logo span {
+  background: linear-gradient(90deg,#ff4bd8,#9c62ff,#36dcff,#4dffb8);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+nav { display: flex; gap: 20px; }
+nav a {
+  color: #b8b8ca;
+  text-decoration: none;
+  font-size: 14px;
+}
+nav a:hover { color: white; }
+main { width: min(1050px, 90%); margin: auto; }
+.hero {
+  padding: 85px 0 45px;
+  text-align: center;
+}
+.pill {
+  display: inline-block;
+  padding: 8px 13px;
+  border: 1px solid #b45bff65;
+  background: #a12aff12;
+  color: #d9a4ff;
+  border-radius: 30px;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+h1 {
+  font-size: clamp(43px, 10vw, 78px);
+  line-height: 1.05;
+  letter-spacing: -4px;
+  margin: 22px 0 14px;
+}
+.gradient {
+  background: linear-gradient(90deg,#ff4bd8,#9c62ff,#36dcff,#4dffb8);
+  background-size: 250% 250%;
+  animation: rainbow 7s linear infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 250% 50%; }
+}
+.subtitle {
+  max-width: 510px;
+  margin: auto;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 15px;
+}
+.search {
+  display: flex;
+  max-width: 590px;
+  margin: 30px auto 0;
+  padding: 6px;
+  border: 1px solid #ffffff20;
+  border-radius: 14px;
+  background: #111119dd;
+  box-shadow: 0 0 35px #8d32ff0c;
+}
+.search input {
+  flex: 1;
+  min-width: 0;
+  padding: 13px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: white;
+  font-size: 15px;
+}
+.search button, .primary {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 18px;
+  color: white;
+  background: linear-gradient(110deg,#8b39ff,#d23dcb,#278eff);
+  font-weight: 750;
+  cursor: pointer;
+  text-decoration: none;
+}
+section { padding: 35px 0; }
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+h2 { margin: 0; font-size: 22px; }
+.section-head p { color: var(--muted); font-size: 13px; }
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.filter {
+  padding: 9px 14px;
+  color: #b8b8ca;
+  background: #14141e;
+  border: 1px solid #ffffff12;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.filter.active, .filter:hover {
+  color: white;
+  border-color: #b64cff;
+  background: #a52cff20;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 15px;
+}
+.tile {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  min-height: 150px;
+  background: var(--panel);
+  border: 1px solid #ffffff14;
+  border-radius: 16px;
+  transition: transform .2s, border-color .2s;
+}
+.tile::before {
+  content: "";
+  position: absolute;
+  height: 2px;
+  left: 15%;
+  right: 15%;
+  top: 0;
+  background: linear-gradient(90deg,#ff4bd8,#8054ff,#35dcff,#48ffae);
+  opacity: .75;
+}
+.tile:hover {
+  transform: translateY(-4px);
+  border-color: #b74cff85;
+}
+.tile .symbol {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg,#a42cff32,#00d9ff24);
+  font-size: 21px;
+}
+.tile h3 { margin: 0 0 7px; font-size: 16px; }
+.tile p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.tile a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.empty { display: none; color: var(--muted); padding: 25px 0; }
+.about {
+  border: 1px solid #ffffff14;
+  background: #111119b8;
+  border-radius: 18px;
+  padding: 28px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.about h2 { color: white; margin-bottom: 10px; }
+footer {
+  border-top: 1px solid #ffffff12;
+  text-align: center;
+  padding: 27px 12px;
+  margin-top: 30px;
+  color: #77778c;
+  font-size: 12px;
+}
+@media(max-width:650px) {
+  header { padding: 15px 5%; }
+  nav { gap: 12px; }
+  nav a { font-size: 12px; }
+  .hero { padding-top: 65px; }
+  h1 { letter-spacing: -2px; }
+  .grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  .tile { padding: 15px; min-height: 145px; }
+  .search button { padding: 11px; }
+}
+@media(max-width:380px) {
+  .grid { grid-template-columns: 1fr; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="#">vro<span>.gg</span></a>
+  <nav>
+    <a href="#links">Quick links</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <span class="pill">YOUR SPACE. YOUR STYLE.</span>
+    <h1>Welcome to<br><span class="gradient">vro.gg</span></h1>
+    <p class="subtitle">
+      Your own corner of the internet.
+      Clean design, neon colors, and your favorite links in one place.
+    </p>
+    <form class="search" id="searchForm">
+      <input id="searchInput" type="search"
+        placeholder="Search your quick links..." aria-label="Search links">
+      <button type="submit">Search</button>
+    </form>
+  </section>
+
+  <section id="links">
+    <div class="section-head">
+      <h2>Quick links</h2>
+      <p id="count">6 links</p>
+    </div>
+    <div class="filters">
+      <button class="filter active" data-category="all">All</button>
+      <button class="filter" data-category="games">Games</button>
+      <button class="filter" data-category="tools">Tools</button>
+      <button class="filter" data-category="sites">Websites</button>
+    </div>
+
+    <div class="grid" id="linkGrid">
+      <!-- Replace each href="#" with your own link. -->
+      <article class="tile" data-category="games">
+        <a href="#" target="_blank" rel="noopener">
+          <div class="symbol">🎮</div>
+          <h3>Game One</h3>
+          <p>Add your favorite game link here.</p>
+        </a>
+      </article>
+      <article class="tile" data-category="games">
+        <a href="#" target="_blank" rel="noopener">
+          <div class="symbol">🕹️</div>
+          <h3>Game Two</h3>
+          <p>Your next gaming destination.</p>
+        </a>
+      </article>
+      <article class="tile" data-category="games">
+        <a href="#" target="_blank" rel="noopener">
+          <div class="symbol">👾</div>
+          <h3>Game Three</h3>
+          <p>Customize this card any way you want.</p>
+        </a>
+      </article>
+      <article class="tile" data-category="tools">
+        <a href="#" target="_blank" rel="noopener">
+          <div class="symbol">🛠️</div>
+          <h3>My Tools</h3>
+          <p>Link to a useful tool or project.</p>
+        </a>
+      </article>
+      <article class="tile" data-category="sites">
+        <a href="#" target="_blank" rel="noopener">
+          <div class="symbol">🌐</div>
+          <h3>My Website</h3>
+          <p>Put your own website here.</p>
+        </a>
+      </article>
+      <article class="tile" data-category="sites">
+        <a href="#" target="_blank" rel="noopener">
+          <div class="symbol">✨</div>
+          <h3>More Links</h3>
+          <p>Add another destination when you're ready.</p>
+        </a>
+      </article>
+    </div>
+    <p class="empty" id="empty">No matching links found.</p>
+  </section>
+
+  <section id="about">
+    <div class="about">
+      <h2><span class="gradient">Made your way.</span></h2>
+      This is your vro.gg homepage. Edit the card names,
+      descriptions, icons, and link addresses directly in
+      <code>index.html</code>. This page is a homepage, not a
+      built-in game host or proxy.
+    </div>
+  </section>
+</main>
+
+<footer>vro.gg · Your space on the web</footer>
+
+<script>
+const input = document.getElementById("searchInput");
+const cards = [...document.querySelectorAll(".tile")];
+const filters = [...document.querySelectorAll(".filter")];
+const count = document.getElementById("count");
+const empty = document.getElementById("empty");
+let category = "all";
+
+function updateCards() {
+  const query = input.value.trim().toLowerCase();
+  let shown = 0;
+
+  cards.forEach(card => {
+    const matchesText = card.innerText.toLowerCase().includes(query);
+    const matchesCategory =
+      category === "all" || card.dataset.category === category;
+    const visible = matchesText && matchesCategory;
+    card.style.display = visible ? "" : "none";
+    if (visible) shown++;
+  });
+
+  count.textContent = shown + (shown === 1 ? " link" : " links");
+  empty.style.display = shown ? "none" : "block";
+}
+
+filters.forEach(button => {
+  button.addEventListener("click", () => {
+    category = button.dataset.category;
+    filters.forEach(item =>
+      item.classList.toggle("active", item === button)
+    );
+    updateCards();
+  });
+});
+
+document.getElementById("searchForm").addEventListener("submit", event => {
+  event.preventDefault();
+  updateCards();
+  document.getElementById("links").scrollIntoView({behavior:"smooth"});
+});
+
+input.addEventListener("input", updateCards);
+updateCards();
+</script>
+</body>
+</html>
